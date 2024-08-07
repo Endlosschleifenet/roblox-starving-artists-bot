@@ -1,5 +1,5 @@
-# [Starving Artists](https://www.roblox.com/games/8916037983/starving-artists-DONATION-GAME) bot (Roblox Game) [Original Fork](https://github.com/Luois45/roblox-starving-artists-bot) from [Luois45](https://github.com/Luois45) 
-- This fork packs some improvements over the old one including efficiency and error-handling.
+# [Starving Artists](https://www.roblox.com/games/8916037983/starving-artists-DONATION-GAME) bot (Roblox Game) | [Original Repository](https://github.com/Luois45/roblox-starving-artists-bot) from [Luois45](https://github.com/Luois45) 
+### This fork packs some improvements over the old repository including efficiency and error-handling.
 
 # Roblox Starving Artists Automation Bot
 
@@ -18,10 +18,13 @@ This repository contains a script designed to automate painting actions in the R
 * [Unix Installation (Mac OS, Linux, etc.,)](#unix-installation)
 * [Usage](#usage)
 * [Contributing](#contributing)
-
+  ### Others
+* [Issues](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/issues)
+* [Discussions](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/discussions)
+* [Original Repository](https://github.com/Luois45/roblox-starving-artists-bot)
 
 ## Features
-* Included in Original branch from [Luois45](https://github.com/Luois45):
+* Included from [Original Repository](https://github.com/Luois45/roblox-starving-artists-bot) by [Luois45](https://github.com/Luois45):
   * Simulates mouse clicks and movements based on the provided image
   * Converts the image into a format suitable for the game
   * Can be compiled into a standalone executable
@@ -34,10 +37,11 @@ This repository contains a script designed to automate painting actions in the R
   * Improved Pause and Quit handling
   * Faster painting generation (This "claim" may vary, but has been seen to, generally, be faster!)
   * Better README
+  * Zoom-fix (resolves an issue where when Roblox's "Spatial Chat" mute/unmute button causes some pixels on the canvas to be un-drawable)
 
 ## Perequisites
 
--   Python 3.x.x+ (Recommended: 3.8+) [Python Downloads](https://www.python.org/downloads/)
+-   Python 3.8-3.9, 3.11-3.12 (Recommended: 3.8+, 3.10 includes a bug that causes pyinstaller to, apparently have errors) [Python Downloads](https://www.python.org/downloads/)
 
 ## Windows Installation
 
