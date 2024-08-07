@@ -34,17 +34,20 @@ This repository contains a script designed to automate painting actions in the R
   * Improved Pause and Quit handling
   * Faster painting generation (This "claim" may vary, but has been seen to, generally, be faster!)
   * Better README
-  * (Untested) Standalone executable compiler for Unix systems
 
 ## Perequisites
 
--   Python 3.8-3.9, 3.11-3.12 (Recommended: 3.8+, 3.10 includes a bug that causes pyinstaller to, apparently have errors) [Python Downloads](https://www.python.org/downloads/)
+-   Python 3.x.x+ (Recommended: 3.8+) [Python Downloads](https://www.python.org/downloads/)
 
 ## Windows Installation
 
 1: Go to https://github.com/Endlosschleifenet/roblox-starving-artists-bot/
-2: Click the green `Code` button
-3: Make sure you're on the `Local` Heading
+2: Find the `Releases` section
+<details>
+ <summary>Illustration</summary>
+ ![photo_2024-08-07_06-47-55](https://github.com/user-attachments/assets/d6e61ff1-66f5-46b5-9be4-4415aa0b352f)
+3: Choose what you'd like from the release
+ 
 </details>
 
 
@@ -61,12 +64,16 @@ Note: This requires your system to have git installed. Verify you have it instal
 ```batch
 git --version
 ```
-  
+<details>![image](https://github.com/user-attachments/assets/386d685f-ef85-49c6-908f-11ae68b389a7)
+</details>
+
 1. Clone the repository:
 
 ```batch
-git clone https://github.com/Luois45/roblox-starving-artists-bot.git
+git clone (https://github.com/Endlosschleifenet/roblox-starving-artists-bot
 ```
+<details>![image](https://github.com/user-attachments/assets/c39dca71-e3db-474d-84f4-fb8e9683d25e)
+</details>
 
 2. Navigate to the project directory:
 
@@ -90,7 +97,7 @@ pip install -r requirements.txt
 1. Start the "[Starving Artists](https://www.roblox.com/games/8916037983/starving-artists-DONATION-GAME)" game on Roblox
 2. Position the game window appropriately (Fullscreen is recommended for 1920x1080 screens)
 
-3. Run the bot by clicking on bot.py
+3. Run the bot by clicking on bot.py or by typing `py bot.py`
 
 4. Follow on-screen instructions
 
