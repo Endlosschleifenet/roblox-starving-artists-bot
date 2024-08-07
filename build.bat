@@ -1,6 +1,6 @@
 # Use PyInstaller to create a standalone executable for bot.py
 
-mkdir -p executables
+if not exist "executables" mkdir executables
 
 pyinstaller --onefile --distpath executables bot.py
 pyinstaller --onefile --distpath executables coordinates-finder.py
