@@ -1,3 +1,5 @@
+## [Original Fork](https://github.com/Luois45/roblox-starving-artists-bot) from [Luois45](https://github.com/Luois45) - This fork packs some improvements over the old one including efficiency and error-handling.
+
 # Roblox Starving Artists Automation Bot
 
 This repository contains a script designed to automate painting actions in the Roblox game "Starving Artists". It uses image recognition and simulates mouse and keyboard actions to paint based on a provided image.
@@ -7,17 +9,49 @@ This repository contains a script designed to automate painting actions in the R
 > **Disclaimer**: Using this script can theoretically get you banned from the game or Roblox platform. It's specifically designed for the "Starving Artists" game on Roblox. Use at your own risk and always respect the terms of service of the game and platform.
 
 ## Features
-
--   Simulates mouse clicks and movements based on the provided image.
--   Converts the image into a format suitable for the game.
--   Can be compiled into a standalone executable.
+### Included in Original branch from [Luois45](https://github.com/Luois45)
+\-   Simulates mouse clicks and movements based on the provided image
+\-   Converts the image into a format suitable for the game
+\-   Can be compiled into a standalone executable
+\-   Supports 32x32 and larger images
+### Improvements:
+\+   Includes co-ordinate finding | [coordinates-finder.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/coordinates-finder.py)
+\+   Image file-search Error-handling
+\+   Roblox Purchase Dialogue box "guard" - Meant to protect you from pesky dialogue boxes for robux (Beta)
+\+   Pause (With letter P) **Will resume when "P" is pressed again regardless of if you're off of Roblox or in a chatbox!
+\+   Improved Pause and Quit handling
+\+   Faster painting generation (This "claim" may vary, but has been seen to, generally, be faster!)
 
 ## Prerequisites
 
--   Python 3.8
+-   Python 3.x.x+ (Recommended: 3.8+) [Python Downloads](https://www.python.org/downloads/)
 
-## Installation
+<details>
+  <summary>Windows Installation</summary>
+  
+1: Download Repository:
+```batch
+Scroll to the top of the page
+Locate the desired "Package" (avaliable under Packages)
+Download, Unzip and use accordingly!
+```
+</details>
 
+<details>
+  <summary>Linux and Unix-Like systems (Mac OS )Installation </summary>
+
+<details>
+  <summary>Simple Installation (Recommended)</summary>
+  See *"Windows Installation"* for details!
+</details>
+
+<details>
+  <summary>Using Terminal/Shell window (Advanced)</summary>
+Note: This requires your system to have git installed. Verify you have it installed by opening a shall/terminal and typing the following:
+```batch
+git --version
+```
+  
 1. Clone the repository:
 
 ```batch
@@ -30,28 +64,31 @@ git clone https://github.com/Luois45/roblox-starving-artists-bot.git
 cd roblox-starving-artist-bot
 ```
 
-3. Install the required packages (It's recommended to use a virtual environment):
+3. Install the required packages:
 
 ```batch
 pip install -r requirements.txt
 ```
+</details>
+</details>
 
 ## Usage
 
-1. Start the "Starving Artist" game on Roblox.
-2. Position the game window appropriately (Fullscreen is recommended on a 1920x1080 screen)
+1. Start the "[Starving Artists](https://www.roblox.com/games/8916037983/starving-artists-DONATION-GAME)" game on Roblox
+2. Position the game window appropriately (Fullscreen is recommended for 1920x1080 screens)
 
-3. Run the bot script:
+3. Run the bot by clicking on bot.py
 
+4. Follow on-screen instructions
+
+5. If any help is required make a bug report with the tag:
 ```batch
-python bot.py
+#assistance
 ```
-
-4. Follow the on-screen instructions.
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Feel free to change, modify, fork, edit, pull whatever! The License allows changes without need for permission or discussion. If you'd like to discuss any bugs or changes or make a pull request feel more than free!
 
 ## License
 
