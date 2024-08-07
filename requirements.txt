@@ -3,3 +3,4 @@ keyboard==0.13.5
 pywin32==306
 Pillow==10.2.0
 tqdm==4.66.1
+ahk==1.7.8
