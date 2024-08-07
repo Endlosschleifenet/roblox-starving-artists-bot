@@ -37,16 +37,13 @@ This repository contains a script designed to automate painting actions in the R
 
 ## Perequisites
 
--   Python 3.x.x+ (Recommended: 3.8+) [Python Downloads](https://www.python.org/downloads/)
+-   Python 3.8-3.9, 3.11-3.12 (Recommended: 3.8+, 3.10 includes a bug that causes pyinstaller to, apparently have errors) [Python Downloads](https://www.python.org/downloads/)
 
 ## Windows Installation
 
-1: Download Repository:
-```batch
-Scroll to the top of the page
-Locate the desired "Package" (avaliable under Packages)
-Download, Unzip and use accordingly!
-```
+1: Go to https://github.com/Endlosschleifenet/roblox-starving-artists-bot/
+2: Click the green `Code` button
+3: Make sure you're on the `Local` Heading
 </details>
 
 
