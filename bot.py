@@ -124,6 +124,16 @@ def check_purchase_dialogue(screenshot):
 # Main execution 
 inputVar = input("Use FastPixel? ")
 
+# Zoom-fix #
+# Zooms In
+pyautogui.keyDown('i')
+time.sleep(3.5)
+pyautogui.keyUp('i')
+
+# Zooms out (Press 'O' 3 times)
+for _ in range(3):
+    pyautogui.press('o')
+    time.sleep(0.01)  # Short delay between presses
 
 
 click(closeButtonX, closeButtonY)
