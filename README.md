@@ -1,34 +1,46 @@
-## [Original Fork](https://github.com/Luois45/roblox-starving-artists-bot) from [Luois45](https://github.com/Luois45) - This fork packs some improvements over the old one including efficiency and error-handling.
+# [Starving Artists](https://www.roblox.com/games/8916037983/starving-artists-DONATION-GAME) bot (Roblox Game) [Original Fork](https://github.com/Luois45/roblox-starving-artists-bot) from [Luois45](https://github.com/Luois45) 
+- This fork packs some improvements over the old one including efficiency and error-handling.
 
 # Roblox Starving Artists Automation Bot
 
 This repository contains a script designed to automate painting actions in the Roblox game "Starving Artists". It uses image recognition and simulates mouse and keyboard actions to paint based on a provided image.
 
-> **Note**: This is a project I made a while ago and just wanted to share with the community. While I don't plan on further developing it, I'll still maintain it and address any issues that may arise.
+> [!NOTE]
+>- From Luois45: This is a project I made a while ago and just wanted to share with the community. While I don't plan on further developing it, I'll still maintain it and address any issues that may arise.
 
-> **Disclaimer**: Using this script can theoretically get you banned from the game or Roblox platform. It's specifically designed for the "Starving Artists" game on Roblox. Use at your own risk and always respect the terms of service of the game and platform.
+> [!WARNING]
+> Using this script can theoretically get you banned from the game or Roblox platform. It's specifically designed for the "Starving Artists" game on Roblox. Use at your own risk and always respect the terms of service of the game and platform.
+
+## Table of Contents
+* [Features](#features)
+* [Prerequisites](#perequesites)
+* [Windows Installation](#windows-installation)
+* [Unix Installation (Mac OS, Linux, etc.,)](#unix-installation)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* 
 
 ## Features
 ### Included in Original branch from [Luois45](https://github.com/Luois45)
-\-   Simulates mouse clicks and movements based on the provided image
-\-   Converts the image into a format suitable for the game
-\-   Can be compiled into a standalone executable
-\-   Supports 32x32 and larger images
+-   Simulates mouse clicks and movements based on the provided image
+-   Converts the image into a format suitable for the game
+-   Can be compiled into a standalone executable
+-   Supports 32x32 and larger images
 ### Improvements:
-\+   Includes co-ordinate finding | [coordinates-finder.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/coordinates-finder.py)
-\+   Image file-search Error-handling
-\+   Roblox Purchase Dialogue box "guard" - Meant to protect you from pesky dialogue boxes for robux (Beta)
-\+   Pause (With letter P) **Will resume when "P" is pressed again regardless of if you're off of Roblox or in a chatbox!
-\+   Improved Pause and Quit handling
-\+   Faster painting generation (This "claim" may vary, but has been seen to, generally, be faster!)
++   Includes co-ordinate finding | [coordinates-finder.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/coordinates-finder.py)
++   Image file-search Error-handling
++   Roblox Purchase Dialogue box "guard" - Meant to protect you from pesky dialogue boxes for robux (Beta)
++   Pause (With letter P) **Will resume when "P" is pressed again regardless of if you're off of Roblox or in a chatbox!
++   Improved Pause and Quit handling
++   Faster painting generation (This "claim" may vary, but has been seen to, generally, be faster!)
++   Better README
 
 ## Prerequisites
 
 -   Python 3.x.x+ (Recommended: 3.8+) [Python Downloads](https://www.python.org/downloads/)
 
-<details>
-  <summary>Windows Installation</summary>
-  
+## Windows Installation
+
 1: Download Repository:
 ```batch
 Scroll to the top of the page
@@ -37,8 +49,8 @@ Download, Unzip and use accordingly!
 ```
 </details>
 
-<details>
-  <summary>Linux and Unix-Like systems (Mac OS )Installation </summary>
+
+## Unix Installation
 
 <details>
   <summary>Simple Installation (Recommended)</summary>
