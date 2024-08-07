@@ -101,10 +101,7 @@ pip install -r requirements.txt
 
 4. Follow on-screen instructions
 
-5. If any help is required make a bug report with the tag:
-```batch
-#assistance
-```
+5. If any help is required make a bug report with the tag `#assistance`
 
 ## Contributing
 
