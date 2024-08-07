@@ -34,6 +34,7 @@ This repository contains a script designed to automate painting actions in the R
   * Improved Pause and Quit handling
   * Faster painting generation (This "claim" may vary, but has been seen to, generally, be faster!)
   * Better README
+  * (Untested) Standalone executable compiler for Unix systems
 
 ## Perequisites
 
