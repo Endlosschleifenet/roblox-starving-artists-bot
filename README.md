@@ -6,36 +6,36 @@
 This repository contains a script designed to automate painting actions in the Roblox game "Starving Artists". It uses image recognition and simulates mouse and keyboard actions to paint based on a provided image.
 
 > [!NOTE]
->- From Luois45: This is a project I made a while ago and just wanted to share with the community. While I don't plan on further developing it, I'll still maintain it and address any issues that may arise.
+> From Luois45: This is a project I made a while ago and just wanted to share with the community. While I don't plan on further developing it, I'll still maintain it and address any issues that may arise.
 
 > [!WARNING]
 > Using this script can theoretically get you banned from the game or Roblox platform. It's specifically designed for the "Starving Artists" game on Roblox. Use at your own risk and always respect the terms of service of the game and platform.
 
 ## Table of Contents
 * [Features](#features)
-* [Prerequisites](#perequesites)
+* [Perequisites](#perequisites)
 * [Windows Installation](#windows-installation)
 * [Unix Installation (Mac OS, Linux, etc.,)](#unix-installation)
 * [Usage](#usage)
 * [Contributing](#contributing)
-* 
+
 
 ## Features
-### Included in Original branch from [Luois45](https://github.com/Luois45)
--   Simulates mouse clicks and movements based on the provided image
--   Converts the image into a format suitable for the game
--   Can be compiled into a standalone executable
--   Supports 32x32 and larger images
-### Improvements:
-+   Includes co-ordinate finding | [coordinates-finder.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/coordinates-finder.py)
-+   Image file-search Error-handling
-+   Roblox Purchase Dialogue box "guard" - Meant to protect you from pesky dialogue boxes for robux (Beta)
-+   Pause (With letter P) **Will resume when "P" is pressed again regardless of if you're off of Roblox or in a chatbox!
-+   Improved Pause and Quit handling
-+   Faster painting generation (This "claim" may vary, but has been seen to, generally, be faster!)
-+   Better README
+* Included in Original branch from [Luois45](https://github.com/Luois45):
+  * Simulates mouse clicks and movements based on the provided image
+  * Converts the image into a format suitable for the game
+  * Can be compiled into a standalone executable
+  * Supports 32x32 and larger images
+* My own Improvements:
+  * Includes co-ordinate finding | [coordinates-finder.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/coordinates-finder.py)
+  * Image file-search Error-handling
+  * Roblox Purchase Dialogue box "guard" - Meant to protect you from pesky dialogue boxes for robux (Beta)
+  * Pause (With letter P) **Will resume when "P" is pressed again regardless of if you're off of Roblox or in a chatbox!
+  * Improved Pause and Quit handling
+  * Faster painting generation (This "claim" may vary, but has been seen to, generally, be faster!)
+  * Better README
 
-## Prerequisites
+## Perequisites
 
 -   Python 3.x.x+ (Recommended: 3.8+) [Python Downloads](https://www.python.org/downloads/)
 
@@ -52,10 +52,10 @@ Download, Unzip and use accordingly!
 
 ## Unix Installation
 
-<details>
-  <summary>Simple Installation (Recommended)</summary>
-  See *"Windows Installation"* for details!
-</details>
+
+  ## Simple Installation (Recommended)
+  See [Windows Installation](https://github.com/your-repo/README.md#windows-installation) for details!
+
 
 <details>
   <summary>Using Terminal/Shell window (Advanced)</summary>
@@ -85,6 +85,9 @@ pip install -r requirements.txt
 </details>
 
 ## Usage
+
+>[!TIP]
+> The bot.py in this repository are the optimised settings for a full-screen 1920x1080 screen.
 
 1. Start the "[Starving Artists](https://www.roblox.com/games/8916037983/starving-artists-DONATION-GAME)" game on Roblox
 2. Position the game window appropriately (Fullscreen is recommended for 1920x1080 screens)
