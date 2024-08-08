@@ -10,7 +10,9 @@ This repository contains a script designed to automate painting actions in the R
 
 > [!WARNING]
 > Using this script can theoretically get you banned from the game or Roblox platform. It's specifically designed for the "Starving Artists" game on Roblox. Use at your own risk and always respect the terms of service of the game and platform.
-> This code (by my implementation) now includes advanced and experimental options. Neither me,  Luois45 or any contributor can be held liable for any incorrect settings in Experimental options. If you intend to use Experimental options in the code, there is an agreement in order to use the feature, otherwise you'll be sent back to the main options.
+
+> [!CAUTION]
+> **This code (by my implementation) now includes advanced and experimental options. Neither me,  Luois45 or any contributor can be held liable for any incorrect settings in Experimental options. If you intend to use Experimental options in the code, there is an agreement in order to use the feature, otherwise you'll be sent back to the main options.**
 
 ## Table of Contents
 * [Features](#features)
