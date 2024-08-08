@@ -25,6 +25,7 @@ This repository contains a script designed to automate painting actions in the R
 * [Issues](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/issues)
 * [Discussions](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/discussions)
 * [Original Repository](https://github.com/Luois45/roblox-starving-artists-bot)
+* [Contact Info](#contact-info)
 
 ## Features
 * Included from [Original Repository](https://github.com/Luois45/roblox-starving-artists-bot) by [Luois45](https://github.com/Luois45):
@@ -49,16 +50,23 @@ This repository contains a script designed to automate painting actions in the R
   * Code will stop upon canvas completion
   * Can make more canvases after your current canvas is finished generating
   * Overhauled UI
+  * Python Version Check
 * Upcomming:
   * Adjust the co-ordinates of everything.
-  * A wiki? (Including Explanations of things etc.) 
+  * A wiki? (Including Explanations of things etc.)
+  * Requirements check and auto-install
 
 > [!NOTE]
-> My newer edits are in a temporary file called [bot-v2.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/bot-v2.py).
+> My newer edits are in a temporary file called [bot-v2.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/bot-v2.py). **Upcomming features are only a snapshot of what could come to this project. It isn't a promise and changes can always happen.
+> [!CAUTION]
+> My newest implementation, [bot-v2.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/bot-v2.py) includes code that is not entirely tested and, in it's own way, is experimental itself. If any bugs arise, please report them in [Issues](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/issues)!
 
 ## Perequisites
 
 -   Python 3.8-3.9, 3.11-3.12 (Recommended: 3.8+, 3.10 includes a bug that causes pyinstaller to, apparently have errors) [Python Downloads](https://www.python.org/downloads/)
+
+> [!IMPORTANT]
+> My implementation of this bot will check if your Python version is acceptable at the very start!
 
 ## Windows Installation
 
@@ -91,7 +99,7 @@ git --version
 1. Clone the repository:
 
 ```batch
-git clone (https://github.com/Endlosschleifenet/roblox-starving-artists-bot
+git clone https://github.com/Endlosschleifenet/roblox-starving-artists-bot
 ```
 <details>![image](https://github.com/user-attachments/assets/c39dca71-e3db-474d-84f4-fb8e9683d25e)
 </details>
@@ -112,7 +120,7 @@ pip install -r requirements.txt
 
 ## Usage
 
->[!TIP]
+> [!IMPORTANT]
 > The bot.py in this repository are the optimised settings for a full-screen 1920x1080 screen.
 
 1. Start the "[Starving Artists](https://www.roblox.com/games/8916037983/starving-artists-DONATION-GAME)" game on Roblox
@@ -127,6 +135,16 @@ pip install -r requirements.txt
 ## Contributing
 
 Feel free to change, modify, fork, edit, pull whatever! The License allows changes without need for permission or discussion. If you'd like to discuss any bugs or changes or make a pull request feel more than free!
+
+Alternatively, reporting bugs in [Issues](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/issues) or engaging in [Discussions](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/discussions) are great way to contribute. Just ensure that you are respectful and patient with others and contributors alike!
+
+If you would like to be apart of the "official" contributors etc., please contact me with any of the contact methods below!
+
+## Contact info
+
+Discord: `.replicr`
+Telegram: `https://t.me/alixsandr_a`
+Steam: `https://steamcommunity.com/profiles/76561199665164189/`
 
 ## License
 
