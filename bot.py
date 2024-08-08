@@ -1,3 +1,7 @@
+#########################################################################################################
+#		Final Commt of bot.py made by Luois45 (New commits published to bot-v2.py		#
+#########################################################################################################
+
 import pyautogui
 import time
 import keyboard
@@ -124,20 +128,23 @@ def check_purchase_dialogue(screenshot):
 # Main execution 
 inputVar = input("Use FastPixel? ")
 
-# Zoom-fix #
-# Zooms In
-pyautogui.keyDown('i')
-time.sleep(3.5)
-pyautogui.keyUp('i')
-
-# Zooms out (Press 'O' 3 times)
-for _ in range(3):
-    pyautogui.press('o')
-    time.sleep(0.01)  # Short delay between presses
-
-
 click(closeButtonX, closeButtonY)
 click(closeButtonX, closeButtonY)
+
+# Zoom-fix
+print("Zooming in...")
+keyboard.press('i')  # Simulate pressing down the 'i' key
+time.sleep(3.5)       # Hold the key down for 3.5 seconds
+keyboard.release('i')  # Release the 'i' key
+print("Zoom in completed.")
+
+# Zooming out
+print("Zooming out...")
+for i in range(3):
+    keyboard.press_and_release('o')  # Press and release the 'o' key
+    time.sleep(0.02)  # Adding a noticeable delay between presses
+print("Zoom out completed.")
+
 
 time.sleep(0.05)
 
@@ -198,3 +205,5 @@ while not quit_flag.is_set(): # Quit process
 
 quit_flag.set()
 key_thread.join()
+
+quit()
