@@ -6,95 +6,11 @@ from PIL import Image
 from tqdm import tqdm
 import win32api, win32con
 import virtualkeystroke as vkey
-import random
 import os
+import sys
+import random
 
-# Function to clear the terminal screen
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-# Function to validate user input for time options
-def get_time_option():
-    while True:
-        clear_screen()
-        print("Choose a click speed option:")
-        print("1. Human-like (6 seconds)")
-        print("2. Quicker (1 second)")
-        print("3. Balanced (0.5 seconds)")
-        print("4. Swift (0.26 seconds)")
-        print("5. Advanced")
-        
-        option = input("Enter a number (1-5): ")
-
-        if option == '1':
-            return 6
-        elif option == '2':
-            return 1
-        elif option == '3':
-            return 0.5
-        elif option == '4':
-            return 0.26
-        elif option == '5':
-            return advanced_options()
-        else:
-            print("Error: Invalid option. Please enter a number between 1 and 5.")
-            time.sleep(2)  # Wait for 2 seconds before re-prompting
-
-# Function to handle advanced options
-def advanced_options():
-    while True:
-        clear_screen()
-        print("Advanced Options:")
-        print("1. Experimental")
-        print("2. Custom Time")
-        print("3. Back")
-        
-        option = input("Enter a number (1-3): ")
-        
-        if option == '1':
-            if solve_puzzle():
-                return 0.1  # Example of an experimental speed
-            else:
-                print("Error: Incorrect puzzle solution. Returning to Advanced Options.")
-                time.sleep(2)
-        elif option == '2':
-            while True:
-                clear_screen()
-                custom_time = float(input("Enter custom time (must not be below 0.26 seconds): "))
-                if custom_time >= 0.26:
-                    return custom_time
-                else:
-                    print("Error: Time must not be below 0.26 seconds.")
-                    time.sleep(2)
-        elif option == '3':
-            return get_time_option()
-        else:
-            print("Error: Invalid option. Please enter a number between 1 and 3.")
-            time.sleep(2)
-
-# Function to present a random math puzzle
-def solve_puzzle():
-    clear_screen()
-    num1 = random.randint(1, 10)
-    num2 = random.randint(1, 10)
-    operation = random.choice(['+', '-'])
-    correct_answer = num1 + num2 if operation == '+' else num1 - num2
-    user_answer = float(input(f"Solve this puzzle to continue: {num1} {operation} {num2} = "))
-    return user_answer == correct_answer
-
-# Get user choice for click delay time
-click_delay = get_time_option()
-
-# Function to simulate a mouse click at given coordinates
-def click(x, y):
-    win32api.SetCursorPos((x, y))
-    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 1, 1, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, -1, -1, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
-    time.sleep(click_delay)  # Use the chosen delay time for sleep
-
-# Define coordinates for various actions
+# Define coordinates for various actions | Must be changed
 firstX, firstY = 644, 163
 lastX, lastY = 1277, 796
 openButtonX, openButtonY = 1093, 867
@@ -105,44 +21,193 @@ diffX = lastX - firstX
 diffY = lastY - firstY
 stepX = diffX / 31
 stepY = diffY / 31
+step = (stepX + stepY) / 2
 
-# Purchase Dialogue Checker
-purchase_check_topL = (831, 118)
-purchase_check_bottomR = (1059, 137)
+purchase_check_topL = (831, 118)  # Example coordinates, replace with actual
+purchase_check_bottomR= (1059,137)  # Example coordinates, replace with actual
 
-pixels = {}
+# Global variables
+click_delay = 1.0
+description = "Default"
+fast_pixel_option = False
 
-# Load the image and process its pixels
-while True:
+# Function to check Python version is "adequate"
+def check_python_version():
+    version_info = sys.version_info
+    if (version_info.major == 3 and 
+        8 <= version_info.minor <= 12 and 
+        version_info.minor != 10):
+        countdown_message(f"Python version {version_info.major}.{version_info.minor} is acceptable.", 2)
+    else:
+        print(f"Python version {version_info.major}.{version_info.minor} is not supported.")
+        print("This script requires Python version between 3.8 and 3.12, but not 3.10.")
+        print("")
+        input("Press any key to continue...")
+        sys.exit(1)
+
+# Function to clear the terminal screen
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+# Function to display a countdown message
+def countdown_message(message, seconds):
     clear_screen()
-    imageName = input("Image name: ")
+    print(message)
+    for i in range(seconds, 0, -1):
+        print(f"\r{i} second{'s' if i > 1 else ''}...", end='', flush=True)
+        time.sleep(1)
+    print()
 
-    if not os.path.isfile(imageName):
-        print("Error: File not found. Please enter a valid file name.")
-        time.sleep(2)
-        continue
-
-    try:
-        image = Image.open(imageName)
-        if image.size != (32, 32):
-            print("Resizing image")
-            image = image.resize((32, 32), resample=Image.BOX)
-            image.save(imageName, quality=100)
+# Function to handle advanced options
+def advanced_options():
+    while True:
+        clear_screen()
+        print("Advanced Options:")
+        print("1. Experimental")
+        print("2. Custom Time")
+        print("3. Back")
         
-        imagePixels = image.load()
-        for x in range(32):
-            for y in range(32):
-                pixels.setdefault(imagePixels[x, y], []).append((x, y))
-        image.close()
-        break
+        option = input("Enter a number (1-3): ").strip()
+        
+        if option == '1':
+            if solve_puzzle():
+                while True:
+                    clear_screen()
+                    print("! WARNING !")
+                    time.sleep(1)
+                    print("Using values lower than 0.26 may cause system instability")
+                    time.sleep(1)
+                    print("or at best some pixels on the canvas to be skipped.")
+                    time.sleep(1)
+                    print("Remember to use Ctrl + Alt + Delete in an emergency")
+                    time.sleep(1)
+                    print("Developers are NOT liable for any incorrect settings set here.")
+                    time.sleep(1)
+                    print("Please agree that you are liable for any damages below,")
+                    time.sleep(1)    
+                    print("otherwise you cannot use Experiments.")
+                    time.sleep(2)      
+                    print("")
+                    time.sleep(0.5)
+                    
+                    agree = input("I Agree: [Y/N]? ").strip().lower()
+                    if agree != "y":
+                        return get_time_option()
+                    
+                    try:
+                        clear_screen()
+                        countdown_message("Warning Acknowledged!",2)
+                        clear_screen()
+                        custom_time = float(input("Enter experimental time (any float number): ").strip())
+                        return custom_time, "Experimental"
+                    except ValueError:
+                        print("Error: Invalid input. Please enter a valid float number.")
+                        countdown_message("Error: Invalid input. Please enter a valid float number.", 2)
+            else:
+                print("Error: Incorrect puzzle solution. Returning to Advanced Options.")
+                countdown_message("Error: Incorrect puzzle solution. Returning to Advanced Options.", 2)
+        elif option == '2':
+            while True:
+                clear_screen()
+                try:
+                    custom_time = float(input("Enter custom time (must be 0.26 seconds or more): ").strip())
+                    if custom_time >= 0.26:
+                        return custom_time, "Custom Time"
+                    
+                    else:
+                        print("Error: Custom time must be 0.26 seconds or more.")
+                        countdown_message("Error: Custom time must be 0.26 seconds or more.", 2)
+                except ValueError:
+                    print("Error: Invalid input. Please enter a valid float number.")
+                    countdown_message("Error: Invalid input. Please enter a valid float number.", 2)
+        elif option == '3':
+            return get_time_option()
+        else:
+            print("Error: Invalid option. Please enter a number between 1 and 3.")
+            countdown_message("Error: Invalid option. Please enter a valid number.", 2)
 
-    except Exception as e:
-        print(f"An error occurred: {e}. Please try again.")
-        time.sleep(2)
+# Function to validate user input for time options
+def get_time_option():
+    while True:
+        clear_screen()
+        print("Choose a click speed option:")
+        print("1. Human-like (3 seconds)")
+        print("2. Quicker (0.7 seconds)")
+        print("3. Balanced (0.5 seconds)")
+        print("4. Swift (0.26 seconds)")
+        print("5. Advanced")
+        
+        option = input("Enter a number (1-5): ").strip()
+
+        if option == '1':
+            click_delay = 3
+            description = "Human-like"
+        elif option == '2':
+            click_delay = 0.7
+            description = "Quicker"
+        elif option == '3':
+            click_delay = 0.5
+            description = "Balanced"
+        elif option == '4':
+            click_delay = 0.26
+            description = "Swift"
+        elif option == '5':
+            click_delay, description = advanced_options()
+            clear_screen()
+        else:
+            countdown_message("Error: Invalid option. Please enter a valid number.", 2)
+            continue
+
+        clear_screen()
+        print(f"{description} ({click_delay} seconds)...")
+        time.sleep(1)  # Wait a second to display the chosen option
+        print("Loaded!")
+        time.sleep(1)  # Wait another second before proceeding
+        return click_delay, description
+
+# Function to present a random math puzzle
+def solve_puzzle():
+    clear_screen()
+    num1 = random.randint(1, 10)
+    num2 = random.randint(1, 10)
+    operation = random.choice(['+', '-'])
+    correct_answer = num1 + num2 if operation == '+' else num1 - num2
+    
+    try:
+        user_answer = float(input(f"Solve this puzzle to continue: {num1} {operation} {num2} = ").strip())
+        return user_answer == correct_answer
+    except ValueError:
+        print("Error: Please enter a valid number.")
+        return False
+
+# Checks if the canvas pixels are still changing
+def check_pixel_changes(screenshot, region, last_pixels):
+    x1, y1, x2, y2 = region
+    unchanged = True
+    current_pixels = {}
+    
+    # Iterate through the defined region
+    for x in range(x1, x2):
+        for y in range(y1, y2):
+            pixel = screenshot.getpixel((x, y))
+            current_pixels[(x, y)] = pixel
+            if (x, y) not in last_pixels or last_pixels[(x, y)] != pixel:
+                unchanged = False
+    
+    return unchanged, current_pixels
 
 # Function to convert RGB to HEX
 def rgb2hex(pixel):
-    return '{:02x}{:02x}{:02x}'.format(*pixel[:3])
+    return '{:02x}{:02x}{:02x}'.format(pixel[0], pixel[1], pixel[2])
+
+# Function to simulate a mouse click at given coordinates
+def click(x, y):
+    win32api.SetCursorPos((x, y))
+    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 1, 1, 0, 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, -1, -1, 0, 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
+    time.sleep(0.05)
 
 # Function to simulate a mouse click on a pixel
 def clickPixel(clickX, clickY):
@@ -158,128 +223,60 @@ def clickFastPixel(addX, addY):
 def clickCheckPixel(addX, addY, color, s):
     clickX = round(firstX + addX * stepX)
     clickY = round(firstY + addY * stepY)
-    pixelColor = s.getpixel((clickX, clickY))
-    if pixelColor[:3] == color[:3]:
-        return False
-    selectColor(color)
-    clickPixel(clickX, clickY)
-    return True
+    if fast_pixel_option:
+        clickFastPixel(addX, addY)
+    else:
+        clickPixel(clickX, clickY)
+    s += 1
+    time.sleep(click_delay)
+    return s
 
-# Function to select a color in the game
-def selectColor(color):
-    hexColor = rgb2hex(color)
-    click(openButtonX, openButtonY)
-    time.sleep(0.001)
-    click(inputX, inputY)
-    time.sleep(0.001)
-    vkey.typer(string=hexColor)
-    time.sleep(0.001)
-    click(closeButtonX, closeButtonY)
+# Function to perform actions within a specific region
+def perform_actions_in_region(region, max_loops=1000):
+    s = 0
+    iteration = 0
+    last_pixels = {}
+    clear_screen()
+    
+    # Main loop
+    while iteration < max_loops:
+        iteration += 1
+        screenshot = pyautogui.screenshot(region=region)
+        unchanged, last_pixels = check_pixel_changes(screenshot, region, last_pixels)
 
-# Function to check for purchase dialogue
-def check_purchase_dialogue(screenshot):
-    purchase_color_hex = 'ec726b'
-    for x in range(purchase_check_topL[0], purchase_check_bottomR[0]):
-        for y in range(purchase_check_topL[1], purchase_check_bottomR[1]):
-            color = screenshot.getpixel((x, y))
-            if rgb2hex(color) != purchase_color_hex:
-                return True
-    return False
-
-# Main execution
-clear_screen()
-inputVar = input("Use FastPixel? ")
-
-click(closeButtonX, closeButtonY)
-click(closeButtonX, closeButtonY)
-
-# Zoom-fix
-print("Zooming in...")
-keyboard.press('i')
-time.sleep(3.5)
-keyboard.release('i')
-print("Zoom in completed.")
-
-# Zooming out
-print("Zooming out...")
-i = 0
-while i < 3:
-    keyboard.press('o')
-    time.sleep(0.01)  # Small delay to ensure the key press is registered
-    keyboard.release('o')
-    time.sleep(0.01)
-    i += 1
-print("Zoom out completed.")
-
-time.sleep(0.01)
-
-pause_flag = threading.Event()
-quit_flag = threading.Event()
-
-def check_keys():  # Pause Function
-    while not quit_flag.is_set():
-        if keyboard.is_pressed('p'):
-            if pause_flag.is_set():
-                clear_screen()
-                print("Resuming...")
-                pause_flag.clear()
-            else:
-                clear_screen()
-                print("Paused. Press 'p' again to continue.")
-                pause_flag.set()
-            time.sleep(0.25)  # Debounce to prevent multiple toggles
-        if keyboard.is_pressed('q'):
-            clear_screen()
-            print("Quitting...")
-            quit_flag.set()
-            break
-        time.sleep(0.01)
-    quit()  # Ensure quit is called when quit_flag is set
-
-key_thread = threading.Thread(target=check_keys)
-key_thread.start()
-
-if inputVar == "y":
-    for color in tqdm(pixels):
-        selectColor(color)
-        for pixel in pixels[color]:
-            clickFastPixel(pixel[0], pixel[1])
-            if quit_flag.is_set():
-                break
-            while pause_flag.is_set():
-                time.sleep(0.05)
-        if quit_flag.is_set():
+        if unchanged:
+            print("Pixels unchanged. Taking action...")
+            s = clickCheckPixel(7, 7, "00644F", s)
+        else:
+            print("Pixels changed.")
+        
+        # Check for termination key
+        if keyboard.is_pressed("q"):
+            print("Termination key pressed. Exiting.")
             break
 
-while not quit_flag.is_set():
-    s = pyautogui.screenshot()
-    if check_purchase_dialogue(s):
+    print(f"Completed {iteration} iterations.")
+    print(f"Clicks: {s}")
+
+# Main function to execute actions
+def main_exec():
+    global click_delay, description, fast_pixel_option
+    click_delay, description = get_time_option()
+    
+    # Prompt user for fast pixel option
+    while True:
         clear_screen()
-        print("Purchase dialogue detected, pressing ESC.")
-        pyautogui.press('esc')
-        pyautogui.press('esc')
-        time.sleep(0.25)
-        continue
-
-    changedPixel = False
-    time.sleep(0.01)
-    for color in tqdm(pixels):
-        for pixel in pixels[color]:
-            if clickCheckPixel(pixel[0], pixel[1], color, s):
-                changedPixel = True
-            if quit_flag.is_set():
-                break
-            while pause_flag.is_set():
-                time.sleep(0.01)
-        if quit_flag.is_set() or not changedPixel:
+        fast_pixel_option = input("Enable fast pixel option? [Y/N]: ").strip().lower() == 'y'
+        if fast_pixel_option in [True, False]:
             break
-    click(closeButtonX, closeButtonY)
-    time.sleep(0.01)
+        print("Error: Invalid input. Please enter 'Y' or 'N'.")
+        countdown_message("Error: Invalid input. Please enter 'Y' or 'N'.", 2)
+    
+    # Perform actions
+    region = (firstX, firstY, diffX, diffY)
+    perform_actions_in_region(region)
 
-quit_flag.set()
-key_thread.join()
-
-# End
-keyboard.press('p')
-time.sleep(0.001)
-keyboard.release('p')
+# Run the main function
+if __name__ == "__main__":
+    check_python_version()
+    main_exec()
