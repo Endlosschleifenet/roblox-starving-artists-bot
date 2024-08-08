@@ -9,8 +9,10 @@ import virtualkeystroke as vkey
 import os
 import sys
 import random
+global click_delay, description, fast_pixel_option
 
-# Define coordinates for various actions | Must be changed
+
+# Define coordinates for various actions
 firstX, firstY = 644, 163
 lastX, lastY = 1277, 796
 openButtonX, openButtonY = 1093, 867
@@ -23,10 +25,11 @@ stepX = diffX / 31
 stepY = diffY / 31
 step = (stepX + stepY) / 2
 
+# Purchase Dialogue Checker
 purchase_check_topL = (831, 118)  # Example coordinates, replace with actual
-purchase_check_bottomR= (1059,137)  # Example coordinates, replace with actual
+purchase_check_bottomR = (1059, 137)  # Example coordinates, replace with actual
 
-# Global variables
+pixels = {}
 click_delay = 1.0
 description = "Default"
 fast_pixel_option = False
@@ -96,7 +99,7 @@ def advanced_options():
                     
                     try:
                         clear_screen()
-                        countdown_message("Warning Acknowledged!",2)
+                        countdown_message("Warning Acknowledged!", 2)
                         clear_screen()
                         custom_time = float(input("Enter experimental time (any float number): ").strip())
                         return custom_time, "Experimental"
@@ -113,7 +116,6 @@ def advanced_options():
                     custom_time = float(input("Enter custom time (must be 0.26 seconds or more): ").strip())
                     if custom_time >= 0.26:
                         return custom_time, "Custom Time"
-                    
                     else:
                         print("Error: Custom time must be 0.26 seconds or more.")
                         countdown_message("Error: Custom time must be 0.26 seconds or more.", 2)
@@ -180,34 +182,9 @@ def solve_puzzle():
         print("Error: Please enter a valid number.")
         return False
 
-# Checks if the canvas pixels are still changing
-def check_pixel_changes(screenshot, region, last_pixels):
-    x1, y1, x2, y2 = region
-    unchanged = True
-    current_pixels = {}
-    
-    # Iterate through the defined region
-    for x in range(x1, x2):
-        for y in range(y1, y2):
-            pixel = screenshot.getpixel((x, y))
-            current_pixels[(x, y)] = pixel
-            if (x, y) not in last_pixels or last_pixels[(x, y)] != pixel:
-                unchanged = False
-    
-    return unchanged, current_pixels
-
 # Function to convert RGB to HEX
 def rgb2hex(pixel):
     return '{:02x}{:02x}{:02x}'.format(pixel[0], pixel[1], pixel[2])
-
-# Function to simulate a mouse click at given coordinates
-def click(x, y):
-    win32api.SetCursorPos((x, y))
-    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 1, 1, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, -1, -1, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
-    time.sleep(0.05)
 
 # Function to simulate a mouse click on a pixel
 def clickPixel(clickX, clickY):
@@ -223,46 +200,100 @@ def clickFastPixel(addX, addY):
 def clickCheckPixel(addX, addY, color, s):
     clickX = round(firstX + addX * stepX)
     clickY = round(firstY + addY * stepY)
-    if fast_pixel_option:
-        clickFastPixel(addX, addY)
-    else:
-        clickPixel(clickX, clickY)
-    s += 1
-    time.sleep(click_delay)
-    return s
+    pixelColor = s.getpixel((clickX, clickY))
+    if pixelColor[0:3] == color[0:3]:
+        return False
+    selectColor(color)
+    clickPixel(clickX, clickY)
+    return True
 
-# Function to perform actions within a specific region
-def perform_actions_in_region(region, max_loops=1000):
-    s = 0
-    iteration = 0
-    last_pixels = {}
+# Function to select a color in the game
+def selectColor(color):
+    hexColor = rgb2hex(color)
+    click(openButtonX, openButtonY)
+    time.sleep(0.01)
+    click(inputX, inputY)
+    time.sleep(0.01)
+    vkey.typer(string=hexColor)
+    time.sleep(0.01)
+    click(closeButtonX, closeButtonY)
+
+# Function to check for purchase dialogue
+def check_purchase_dialogue(screenshot):
+    purchase_color_hex = 'ec726b'  # Drawing Canvas background (usually bright pinkish)
+    for x in range(purchase_check_topL[0], purchase_check_bottomR[0]):
+        for y in range(purchase_check_topL[1], purchase_check_bottomR[1]):
+            color = screenshot.getpixel((x, y))
+            if rgb2hex(color) != purchase_color_hex:
+                return True
+    return False
+
+# Function to load and process the image
+def load_image():
+    global pixels
+    while True:
+        imageName = input("Image name: ")
+
+        # Check if the file exists
+        if not os.path.isfile(imageName):
+            print("Error: File not found. Please enter a valid file name.")
+            continue
+
+        try:
+            # Open and process the image
+            image = Image.open(imageName)
+            if image.size[0] != 32 or image.size[1] != 32:
+                print("Resizing image")
+                image = image.resize((32, 32), resample=Image.BOX)
+                image.save(imageName, quality=100)
+
+            imagePixels = image.load()
+            for x in range(32):
+                for y in range(32):
+                    try:
+                        pixels[imagePixels[x, y]].append([x, y])
+                    except KeyError:
+                        pixels[imagePixels[x, y]] = [[x, y]]
+            image.close()
+            break  # Exit the loop if image processing is successful
+
+        except Exception as e:
+            print(f"An error occurred: {e}. Please try again.")
+
+# Confirm the settings with the user
+def confirm_settings(click_delay, image_name, fast_pixel_option, description):
     clear_screen()
-    
-    # Main loop
-    while iteration < max_loops:
-        iteration += 1
-        screenshot = pyautogui.screenshot(region=region)
-        unchanged, last_pixels = check_pixel_changes(screenshot, region, last_pixels)
+    print(f"Click Speed Description: {description} ({click_delay} seconds)")
+    print(f"Image File: {image_name}")
+    print(f"Fast Pixel Option: {fast_pixel_option}")
+    time.sleep(1)
+    print()
+    time.sleep(1)
 
-        if unchanged:
-            print("Pixels unchanged. Taking action...")
-            s = clickCheckPixel(7, 7, "00644F", s)
-        else:
-            print("Pixels changed.")
-        
-        # Check for termination key
-        if keyboard.is_pressed("q"):
-            print("Termination key pressed. Exiting.")
-            break
+    confirm = input("Are you satisfied with the settings? (yes/no): ").strip().lower()
+    if confirm in ['y', 'yes']:
+        return True
+    else:
+        return False
 
-    print(f"Completed {iteration} iterations.")
-    print(f"Clicks: {s}")
+# Check Python version
+check_python_version()
+
+
+click_delay, description = get_time_option()
+
+# Function to simulate a mouse click at given coordinates
+def click(x, y):
+    win32api.SetCursorPos((x, y))
+    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 1, 1, 0, 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, -1, -1, 0, 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
+    time.sleep(click_delay)
 
 # Main function to execute actions
 def main_exec():
-    global click_delay, description, fast_pixel_option
-    click_delay, description = get_time_option()
-    
+
     # Prompt user for fast pixel option
     while True:
         clear_screen()
@@ -271,12 +302,91 @@ def main_exec():
             break
         print("Error: Invalid input. Please enter 'Y' or 'N'.")
         countdown_message("Error: Invalid input. Please enter 'Y' or 'N'.", 2)
-    
-    # Perform actions
-    region = (firstX, firstY, diffX, diffY)
-    perform_actions_in_region(region)
+
+    # Load the image
+    load_image()
+
+    click(closeButtonX, closeButtonY) # Focus roblox
+    time.sleep(0.02) # Wait for registration
+    click(closeButtonX, closeButtonY) # Clicks close on colour picker just incase its open
+    # Zoom-fix
+    print("Zooming in...")
+    keyboard.press('i')  # Simulate pressing down the 'i' key
+    time.sleep(3.5)       # Hold the key down for 3.5 seconds
+    keyboard.release('i')  # Release the 'i' key
+    print("Zoom in completed.")
+
+    # Zooming out
+    print("Zooming out...")
+    for i in range(1):
+        keyboard.press('o')  # Press the 'o' key
+        time.sleep(0.02)  # Delay to help the key register properly
+        keyboard.release('o') # Release the 'o' key
+        
+    print("Zoom out completed.")
+
+    time.sleep(0.01)
+
+    pause_flag = threading.Event()
+    quit_flag = threading.Event()
+
+    def check_keys():
+        while not quit_flag.is_set():
+            if keyboard.is_pressed('p'):
+                if pause_flag.is_set():
+                    print("Resuming...")
+                    pause_flag.clear()
+                else:
+                    print("Paused. Press 'p' again to continue.")
+                    pause_flag.set()
+                time.sleep(0.3)  # Debounce to prevent multiple toggles
+            if keyboard.is_pressed('q'):
+                quit_flag.set()
+                break
+            time.sleep(0.01)
+
+    key_thread = threading.Thread(target=check_keys)
+    key_thread.start()
+
+    if fast_pixel_option:
+        for color in tqdm(pixels):
+            selectColor(color)
+            for pixel in pixels[color]:
+                clickFastPixel(pixel[0], pixel[1])
+                if quit_flag.is_set():
+                    quit()
+                while pause_flag.is_set():
+                    time.sleep(0.01)
+
+    while not quit_flag.is_set():
+        s = pyautogui.screenshot()
+        if check_purchase_dialogue(s):
+            print("Purchase dialogue detected, pressing ESC.")
+            pyautogui.press('esc')
+            pyautogui.press('esc')
+            time.sleep(0.5)
+            continue
+
+        changedPixel = False
+        time.sleep(0.01)
+        for color in tqdm(pixels):
+            for pixel in pixels[color]:
+                if clickCheckPixel(pixel[0], pixel[1], color, s):
+                    changedPixel = True
+                if quit_flag.is_set():
+                    quit()
+                while pause_flag.is_set():
+                    time.sleep(0.01)
+        if not changedPixel:
+            break
+        click(closeButtonX, closeButtonY)
+        time.sleep(0.01)
+
+    quit_flag.set()
+    key_thread.join()
+
+    quit()
 
 # Run the main function
 if __name__ == "__main__":
-    check_python_version()
     main_exec()
