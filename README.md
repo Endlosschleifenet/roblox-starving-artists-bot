@@ -142,9 +142,9 @@ If you would like to be apart of the "official" contributors etc., please contac
 
 ## Contact info
 
-Discord: `.replicr`
-Telegram: `https://t.me/alixsandr_a`
-Steam: `https://steamcommunity.com/profiles/76561199665164189/`
+* Discord: `.replicr`
+* Telegram: `https://t.me/alixsandr_a`
+* Steam: `https://steamcommunity.com/profiles/76561199665164189/`
 
 ## License
 
