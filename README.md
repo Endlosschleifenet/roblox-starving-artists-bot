@@ -38,6 +38,14 @@ This repository contains a script designed to automate painting actions in the R
   * Faster painting generation (This "claim" may vary, but has been seen to, generally, be faster!)
   * Better README
   * Zoom-fix (resolves an issue where when Roblox's "Spatial Chat" mute/unmute button causes some pixels on the canvas to be un-drawable)
+  * Optimised, re-made UI
+  * Easy access to change Click-speed (How fast the bot draws the painting) along with presets and customisation
+  * Input Error-Handling
+  * Some code-cleanup
+  * Bug fixes(?)
+
+> [!NOTE]
+> My newer edits are in a temporary file called [bot-v2.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/bot-v2.py).
 
 ## Perequisites
 
