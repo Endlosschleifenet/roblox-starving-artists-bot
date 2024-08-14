@@ -1,6 +1,8 @@
 # [Starving Artists](https://www.roblox.com/games/8916037983/starving-artists-DONATION-GAME) bot (Roblox Game) | [Original Repository](https://github.com/Luois45/roblox-starving-artists-bot) from [Luois45](https://github.com/Luois45) 
 ### This fork packs some improvements over the old repository including efficiency and error-handling.
 
+![Alt](https://repobeats.axiom.co/api/embed/dd69147f91b4d46e115a2e19bd584ef7ae1d6ea5.svg "Repobeats analytics image")
+
 # Roblox Starving Artists Automation Bot
 
 This repository contains a script designed to automate painting actions in the Roblox game "Starving Artists". It uses image recognition and simulates mouse and keyboard actions to paint based on a provided image.
