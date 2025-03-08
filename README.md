@@ -60,7 +60,8 @@ This repository contains a script designed to automate painting actions in the R
 
 > [!NOTE]
 > My newer edits are in a temporary file called [bot-v2.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/bot-v2.py). **Upcomming features are only a snapshot of what could come to this project. It isn't a promise and changes can always happen.
-> [!CAUTION]
+
+> > [!CAUTION]
 > My newest implementation, [bot-v2.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/bot-v2.py) includes code that is not entirely tested and, in it's own way, is experimental itself. If any bugs arise, please report them in [Issues](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/issues)!
 
 ## Perequisites
