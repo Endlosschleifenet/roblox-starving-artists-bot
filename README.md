@@ -1,3 +1,6 @@
+> [!CAUTION]
+> My newest implementation, [bot-v2.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/bot-v2.py) includes code that is not entirely tested and, in it's own way, is experimental itself. If any bugs arise, please report them in [Issues](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/issues)!
+
 # [Starving Artists](https://www.roblox.com/games/8916037983/starving-artists-DONATION-GAME) bot (Roblox Game) | [Original Repository](https://github.com/Luois45/roblox-starving-artists-bot) from [Luois45](https://github.com/Luois45) 
 ### This fork packs some improvements over the old repository including efficiency and error-handling.
 
@@ -60,8 +63,6 @@ This repository contains a script designed to automate painting actions in the R
 
 > [!NOTE]
 > My newer edits are in a temporary file called [bot-v2.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/bot-v2.py). **Upcomming features are only a snapshot of what could come to this project. It isn't a promise and changes can always happen.
-> [!CAUTION]
-> My newest implementation, [bot-v2.py](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/blob/main/bot-v2.py) includes code that is not entirely tested and, in it's own way, is experimental itself. If any bugs arise, please report them in [Issues](https://github.com/Endlosschleifenet/roblox-starving-artists-bot/issues)!
 
 ## Perequisites
 
